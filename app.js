@@ -9,7 +9,7 @@ dotenv.config();
 
 // Initialize express app
 const app = express();
-const port = 5555;
+const port = process.env.PORT || 5555;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());  // Parse JSON bodies
