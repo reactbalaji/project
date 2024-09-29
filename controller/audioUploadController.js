@@ -30,7 +30,7 @@ router.post('/upload', upload.single('audio'), async (req, res) => {
 
   try {
     const command = new PutObjectCommand(params);
-    const data = await s3.send(command);
+    await s3.send(command);
     fs.unlinkSync(file.path); // Delete the temp file after upload
     res.status(200).send({
       message: 'Upload successful',
