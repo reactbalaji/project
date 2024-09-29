@@ -8,6 +8,9 @@ const {
   } = require('@aws-sdk/client-cognito-identity-provider');
 const crypto = require('crypto');
 
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 
 // === AWS Cognito Client Config ===

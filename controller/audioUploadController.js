@@ -1,10 +1,12 @@
 let express = require('express');
-let router = express.Router();
+
 const multer = require('multer');
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const fs = require('fs');
+const dotenv = require('dotenv');
 
-
+dotenv.config();
+let router = express.Router();
 
 // === AWS S3 Client Config ===
 const s3 = new S3Client({
@@ -30,7 +32,7 @@ router.post('/upload', upload.single('audio'), async (req, res) => {
 
   try {
     const command = new PutObjectCommand(params);
-    await s3.send(command);
+    const data = await s3.send(command);
     fs.unlinkSync(file.path); // Delete the temp file after upload
     res.status(200).send({
       message: 'Upload successful',
@@ -45,3 +47,6 @@ router.post('/upload', upload.single('audio'), async (req, res) => {
 
 
 module.exports = router;
+
+
+
